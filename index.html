@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>zuningo88 - js-snack-es6</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: darkslateblue;
+        }
+
+        #container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            color: white;
+            background-color: teal;
+            border: solid 2px black;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .pi {
+            margin-top: 15px;
+            transition: all 0.5s;
+        }
+
+        .pi:hover {
+            scale: 1.5;
+        }
+
+        .red {
+            color: red;
+            background-color: beige;
+        }
+
+        .green {
+            color: green;
+            background-color: beige;
+        }
+
+        #myButton {
+            margin-top: 10px;
+            padding: 10px;
+            border: solid 3px white;
+            border-radius: 8px;
+            color: black;
+            background-color: coral;
+        }
+
+        #myButton:hover {
+            border: solid 3px coral;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="container">
+        <h1 id="titolo">ciao mondo</h1>
+        <p id="p1" class="pi">tanti saluti</p>
+        <p id="p2" class="pi">tanti saluti</p>
+        <p id="p3" class="pi">tanti saluti</p>
+        <input type="button" value="CLICK ME" id="myButton">
+    </div>
+
+    <script>
+
+        //creare oggetto a aprtire da variabili
+        function objVar() {
+
+            let name;
+            let surname;
+            let age;
+
+            let obj = { name, surname, age };
+
+            console.log(obj);
+        }
+
+        //objVar();
+
+        //partire da un narray per arrivare a creare delle variabili
+        function arr() {
+
+            let arr1 = [1, 2, 3];
+            let [a, b, c] = arr1;
+
+            console.log(arr1, a, b, c);
+
+            let arr2 = [4, 5, 6];
+            let [d, , e] = arr2;
+
+            console.log(arr2, d, e);
+        }
+
+        //arr();
+
+        //partire da un object per arrivare a creare delle variabili
+        function obj() {
+
+            let obj = {
+                'name': 'valerio',
+                'surname': 'sgura'
+            }
+
+            let { name, surname } = obj;
+
+            console.log(obj, name, surname);
+        }
+
+        //obj();
+
+        function es1() {
+
+            // Creare un array di oggetti: ogni oggetto descriverà 
+            // una bici da corsa con le seguenti proprietà: nome e peso. 
+            // Stampare a schermo la bici con peso minore.
+
+            const biciclette = [
+                {
+                    'nome': 'bici1',
+                    'peso': 5
+                },
+                {
+                    'nome': 'bici2',
+                    'peso': 7
+                },
+                {
+                    'nome': 'bici3',
+                    'peso': 4
+                }];
+
+            let pesoMax = Number.MAX_SAFE_INTEGER;
+
+            //oggetto con ipotetica bici dal peso minore
+            let biciMin = {
+                'nome': '',
+                'peso': pesoMax
+            }
+
+
+            for (let i = 0; i < biciclette.length; i++) {
+
+                //estraggo singoli oggetti bici da array biciclette
+                const bici = biciclette[i];
+                //estraggo il peso dall'oggetto bici
+                const { peso } = bici;
+
+                //se il peso ottenuto da bici è minore di quello di riferimento (in biciMin)
+                if (peso < biciMin.peso) {
+                    //allora l'oggetto bici a cui appartiene il peso diventa biciMin
+                    biciMin = bici;
+                }
+            }
+
+            console.log(biciMin);
+        }
+
+        //es1();
+
+        function es2() {
+
+            // Creare un array di oggetti di squadre di calcio. 
+            // Ogni squadra avrà diverse proprietà: 
+            // nome, punti fatti, falli subiti.
+            // Nome sarà l'unica proprietà da compilare, 
+            // le altre saranno tutte settate a 0. 
+
+            const squadre = [
+                {
+                    'nome': 'milan',
+                    'punti': 0,
+                    'falli': 0
+                },
+                {
+                    'nome': 'inter',
+                    'punti': 0,
+                    'falli': 0
+                },
+                {
+                    'nome': 'juve',
+                    'punti': 0,
+                    'falli': 0
+                },
+                {
+                    'nome': 'roma',
+                    'punti': 0,
+                    'falli': 0
+                }
+            ];
+
+            // Generare numeri random al posto degli 0 nelle proprietà:
+            // punti fatti e falli subiti
+
+            // Usando la destrutturazione creiamo un nuovo array 
+            // i cui elementi contengono solo nomi e falli subiti 
+            // e stampiamo tutto in console.
+
+            function rnd(min, max) {
+                return Math.floor(Math.random() * max - min + 1) + min
+            }
+
+            const arr = [];
+
+            for (let i = 0; i < squadre.length; i++) {
+
+                //estraggo i singoli oggetti squadra dall'array
+                const squadra = squadre[i];
+
+                //assegno valori casuali a punti e falli
+                squadra.punti = rnd(0, 50);
+                squadra.falli = rnd(0, 100)
+
+                //dall'oggetto squadra prendo le chiavi 'nome' e 'falli'
+                const { nome, falli } = squadra;
+                //creo un oggetto con queste due chiavi
+                const obj = { nome, falli };
+                //lo pusho nell'array vuoto creato in precedenza
+                arr.push(obj);
+            }
+
+            console.log(squadre);
+            console.log(arr);
+        }
+
+        es2();
+
+
+    </script>
+
+</body>
+
+</html>
