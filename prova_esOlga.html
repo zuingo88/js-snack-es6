@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+        crossorigin="anonymous"></script>
+    <title>zuingo88 - esOlga</title>
+    <style>
+        body {
+            background-color: darkslateblue;
+        }
+
+        #container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            color: white;
+            background-color: teal;
+            border: solid 2px black;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .pi {
+            transition: all 0.5s;
+        }
+
+        .pi:hover {
+            scale: 2;
+        }
+
+        .red {
+            color: red;
+            background-color: beige;
+        }
+
+        .green {
+            color: green;
+            background-color: beige;
+        }
+
+        #myButton {
+            padding: 10px;
+            border: solid 3px white;
+            border-radius: 8px;
+            color: black;
+            background-color: coral;
+        }
+
+        #myButton:hover {
+            border: solid 3px coral;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="container">
+        <h1 id="titolo">ciao mondo</h1>
+        <p id="p1" class="pi">tanti saluti</p>
+        <p id="p2" class="pi">tanti saluti</p>
+        <p id="p3" class="pi">tanti saluti</p>
+        <input type="button" value="CLICK ME" id="myButton">
+    </div>
+
+    <script>
+
+        //Scrivere una funzione che accetti tre argomenti, un array e due numeri(a più piccolo di b).
+        //La funzione ritornerà un nuovo array con i valori che hanno la posizione compresa tra i due numeri.
+        //Usiamo i nuovi metodi degli array foreach o filter.
+
+
+        //array con valori da a a b
+        const getArr = (a, b) => {
+            let arr = [];
+                
+            for (i = a; i < (b + 1); i++) {
+                arr.push(i);
+            }
+            console.log('arr: ', arr);
+            return arr
+        }
+
+        //valore random tra 1 e 10
+        const getA = () => {
+            let a = Math.floor(Math.random() * (10 - 1 + 1)) + 1;
+            console.log('a: ', a);
+            return a
+            
+        }
+
+        //valore random tra 11 e 20
+        const getB = () => {
+            let b = Math.floor(Math.random() * (20 - 11 + 1)) + 11;
+            console.log('b: ', b);
+            return b            
+        }
+
+        //funzione per trovare valori intermedi con metodo filter()
+        function solFilter() {
+
+            const myFun1 = (array, a, b) => {
+
+                let filtered = []
+
+                if (a < b) {
+                    filtered = array.filter(x => (x > a) && (x < b));
+                } else {
+                    console.log('a non è minore di b');
+                }
+                console.log('filtered con metodo filter(): ', filtered);
+                return filtered
+            }
+
+            myFun1(getArr(1, 20), getA(), getB());
+        }
+
+        solFilter();
+
+
+        //funzione per trovare valori intermedi con metodo forEach()
+        function solForEach() {
+
+            const myFun2 = (array, a, b) => {
+
+                let filtered = [];
+
+                array.forEach(elem => {
+                    if ((elem > a) && (elem < b)) {
+                        filtered.push(elem)
+                    }
+                })
+
+                console.log('filtered con metodo forEach(): ', filtered);
+                return filtered
+            }
+
+            myFun2(getArr(1, 20), getA(), getB());
+        }
+
+        solForEach();
+
+    </script>
+
+</body>
+
+</html>
